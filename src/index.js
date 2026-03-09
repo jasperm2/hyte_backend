@@ -25,7 +25,7 @@ app.use(requestLogger);
 
 // API root
 app.get('/api', (req, res) => {
-  res.send('Teacher example Health Diary API!');
+  res.send('Health Diary API!');
 });
 
 // Users resource router for all /api/users routes
