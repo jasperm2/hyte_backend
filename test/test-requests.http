@@ -1,7 +1,7 @@
 # Test HTTP requests
 ### use with: REST Client extension
 @apiurl = http://localhost:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6ImJvYl9icm93biIsImVtYWlsIjoiYm9iQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjQtMDEtMDVUMDU6NDU6MDAuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzcwNjQwNzUzLCJleHAiOjE3NzA3MjcxNTN9.0c3R1r0jZWRmVRZkIsBPiqWkwsKj62BEzdkVVfpdzjo
+@token = 5ej3sixcmw
 
 ### GET all items
 GET {{apiurl}}/items

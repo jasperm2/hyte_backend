@@ -1,4 +1,4 @@
-/*M!999999\- enable the sandbox mode */ 
+/*M!999999\- enable the sandbox mode */
 -- MariaDB dump 10.19-12.1.2-MariaDB, for osx10.20 (arm64)
 --
 -- Host: localhost    Database: HealthDiary

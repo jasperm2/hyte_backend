@@ -5,7 +5,8 @@ import {
   findUserByUsername,
   listAllUsers,
   findUserById,
-  removeUserById
+  removeUserById,
+  updateUserById
 } from '../models/user-model.js';
 
 // TODO: lisää tietokantafunktiot user modeliin
@@ -20,6 +21,36 @@ const getUserById = async (req, res) => {
     res.json(user);
   } else {
     res.status(404).json({message: 'User not found'});
+  }
+};
+
+const putUserById = async (req, res) => {
+  const id = req.params.id;
+  const {username, password, email} = req.body;
+
+  // Tarkistetaan, että kaikki kentät on täytetty
+  if (!username || !password || !email) {
+    return res.status(400).json({message: 'Missing required fields'});
+  }
+
+  try {
+    // Lasketaan salasanasta uusi tiiviste (hash)
+    const hash = await bcrypt.hash(password, 10);
+
+    const success = await updateUserById({
+      username,
+      password: hash,
+      email,
+      id
+    });
+
+    if (success) {
+      res.json({message: 'User updated'});
+    } else {
+      res.status(404).json({message: 'User not found'});
+    }
+  } catch (error) {
+    res.status(500).json({message: 'Update failed', error: error.message});
   }
 };
 
@@ -80,4 +111,4 @@ const getMe = (req, res) => {
   res.json(req.user);
 };
 
-export {getUsers, postUser, postLogin, getMe, getUserById, deleteUserById};
+export {getUsers, postUser, postLogin, getMe, getUserById, deleteUserById, putUserById};

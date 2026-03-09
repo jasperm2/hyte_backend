@@ -5,9 +5,13 @@ import userRouter from './routes/user-router.js';
 import requestLogger from './middlewares/logger.js';
 import entryRouter from './routes/entry-router.js';
 import {errorHandler, notFoundHandler} from './middlewares/error-handlers.js';
+import dotenv from "dotenv";
+dotenv.config();
 const hostname = '127.0.0.1';
 const app = express();
 const port = 3000;
+
+console.log("DB HOST:", process.env.DB_HOST);
 
 // enable CORS requests
 app.use(cors());

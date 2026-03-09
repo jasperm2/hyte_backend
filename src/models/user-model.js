@@ -9,6 +9,19 @@ const findUserById = async (id) => {
   return rows[0];
 };
 
+const putUserById = async (user) => {
+  const {username, password, email, id} = user;
+  const sql = 'UPDATE Users SET username = ?, password = ?, email = ? WHERE user_id = ?';
+  const params = [username, password, email, id];
+  try {
+    const [result] = await promisePool.execute(sql, params);
+    return result.affectedRows > 0;
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
+  }
+};
+
 // Päivitä käyttäjän tiedot
 const updateUserById = async (user) => {
   const {username, password, email, id} = user;
@@ -38,9 +51,8 @@ const addUser = async (user) => {
                VALUES (?, ?, ?)`;
   const params = [username, password, email];
   try {
-    const result = await promisePool.execute(sql, params);
-    //console.log('insert result', result);
-    return {user_id: result[0].insertId};
+    const [result] = await promisePool.execute(sql, params);
+    return {user_id: result.insertId};
   } catch (e) {
     console.error('error', e.message);
     return {error: e.message};
@@ -54,4 +66,4 @@ const findUserByUsername = async (username) => {
   return rows[0];
 };
 
-export {findUserByUsername, addUser, listAllUsers, findUserById, updateUserById, removeUserById};
+export {findUserByUsername, addUser, listAllUsers, findUserById, updateUserById, removeUserById, putUserById};
